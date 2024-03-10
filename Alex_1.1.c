@@ -49,6 +49,15 @@ int main( void ) { // выполнение программы начинаетс
                 printf( "Maximum is: %d\n", a[ b ] );
                 break;
                 } // конец if
-            } // конец for
-        
-}
+        } // конец for
+
+        // поиск позиций минимальных и максимальных значений
+        for( b = 0; b < SIZE; ++b ) {
+            if( a[ b ] < 1 ) {
+            printf( "a[ %zu ] = 0\n", b );
+            } // конец if
+            else if( a[ b ] > 253 ) {
+            printf( "a[ %zu ] = 254\n", b );
+            } // конец else if
+        } // конец for
+} // конец main
