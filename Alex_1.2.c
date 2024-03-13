@@ -10,7 +10,7 @@
 
 int main() {
     uint8_t array[ARRAY_SIZE];
-    uint8_t arr[] = { 0 };
+    uint8_t arr[ ] = { 0 };
     uint8_t min_value = array[0];
     uint8_t max_value = array[0];
     int min_index = 0;
@@ -19,15 +19,16 @@ int main() {
 
     // Находим минимальное и максимальное значение, а также их позиции в массиве
     for ( i = 1; i < ARRAY_SIZE; ++i) {
-        if ( array[ i ] <= min_value ) {
+
+        ++arr[ array[ i ] ];
+        if ( array[ i ] < min_value ) {
             min_value = array[i];
             min_index = i;
-            ++arr[ array[ min_value ] ]; 
+             //++arr[ i[ array ] ];
         }
-        if ( array[ i ] >= max_value ) {
+        if ( array[ i ] > max_value ) {
             max_value = array[i];
             max_index = i;
-            ++arr[ array[ max_value ] ];
         }
     }
 
