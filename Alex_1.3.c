@@ -1,65 +1,64 @@
 #include <stdio.h>
 #include <stdint.h>
 #define SIZE 512 // ДП
-int main() {
-    uint8_t originalArray[ SIZE ]; // Исходный массив из 512 элементов
-    uint8_t minPositions[ SIZE ] = { 0 }; // Массив для хранения позиций минимальных значений
-    uint8_t maxPositions[ SIZE ] = { 0 }; // Массив для хранения позиций максимальных значений
-    unsigned int minCount = 0; // Количество минимальных значений
-    unsigned int maxCount = 0; // Количество максимальных значений 
-    unsigned int min = 0; // минимальное значение исходного массива
-    unsigned int max = 0; // максимальное значение исходного массива
+int main( void ) 
+{   uint8_t originalArray[ SIZE ]; // Исходный массив
+    unsigned int minPositions[ SIZE ] = { 0 }; // Массив для хранения позиций минимальных значений
+    unsigned int maxPositions[ SIZE ] = { 0 }; // Массив для хранения позиций максимальных значений
+    unsigned int min_value; // минимальное значение исходного массива
+    unsigned int max_value; // максимальное значение исходного массива
+    unsigned int num_min_value = 0; // Количество минимальных значений
+    unsigned int num_max_value = 0; // Количество максимальных значений 
+    
     size_t i; // счетчик
-    //size_t a; // счетчик
-
 
     unsigned int size = sizeof( originalArray ) / sizeof( originalArray[ 0 ] ); // Вычисляем размер массива
 
-    // находим минимальное и максимальное значение елементов исходящего массива
+    // поиск минимальное и максимальное значение елементов исходящего массива
+    min_value = originalArray[ 0 ]; // задать начальное значение
+    max_value = originalArray[ 0 ];
     for ( i = 0; i < size; i++ ) {
-        if ( originalArray[ i ] < min ) {
-            min = originalArray[ i ];
+        if ( originalArray[ i ] < min_value ) {
+            min_value = originalArray[ i ];
         }
-        else if ( originalArray[ i ] > max) {
-            max = originalArray[ i ];
+        else if ( originalArray[ i ] > max_value ) {
+            max_value = originalArray[ i ];
         }
     }
     // поиск позиций минимальных и максимальных значений исходного массива и складываем их в массивы
     for ( i = 0; i < size; i++ ) {
-        if ( originalArray[ i ] == min ) {
-            minPositions[ minCount ] = i;
-            minCount++;
+        if ( originalArray[ i ] == min_value ) {
+            minPositions[ num_min_value ] = i;
+            ++num_min_value;
         } 
-        else if ( originalArray[ i ] == max ) {
-            maxPositions[ maxCount ] = i;
-            maxCount++;
+        else if ( originalArray[ i ] == max_value ) {
+            maxPositions[ num_max_value ] = i;
+            num_max_value++;
         }
     }
 
     // Вывод минимального и максимального значений массива
-    printf( "\nМинимум: %u \nМаксимум: %u \n", min, max ); 
+    printf( "Минимум: %u\nМаксимум: %u\n\n", min_value, max_value ); 
 
-    printf( "\nКоличество минимальных значений: %u \nКоличество максимальных значений: %u \n", minCount, maxCount ); 
+    printf( "Количество минимальных значений: %u\nКоличество максимальных значений: %u\n", num_min_value, num_max_value ); 
 
     // Вывод найденных позиций значений 0
-    printf("\nПозиции минимальных значений:\n");
-    for (int i = 0; i < minCount; i++) {
-        printf("%4d ", minPositions[i]);
+    printf( "\n%s\n", "Позиции минимальных значений:" );
+    for ( int i = 0; i < num_min_value; i++ ) {
+        printf( "%-4d ", minPositions[ i ] );
         if( i % 28 == 27 ) {
             puts("");
         }
     }
-    printf("\n");
 
     // Вывод найденных позиций значений 255
-    printf("\nПозиции максимальных значений:\n");
-    for (int i = 0; i < maxCount; i++) {
-        printf("%4d ", maxPositions[i]);
+    printf( "\n\n%s\n", "Позиции максимальных значений:" );
+    for ( int i = 0; i < num_max_value; i++ ) {
+        printf( "%-4d ", maxPositions[ i ] );
         if( i % 28 == 27 ) {
             puts("");
         }
     }
-    //printf("\n");
-
+    puts( "" );
     return 0;
-}
+} // конец main
